@@ -31,7 +31,7 @@ namespace D2RModding_SpriteEdit
                 var bytes = File.ReadAllBytes(fileName);
                 int x, y;
                 var width = BitConverter.ToInt32(bytes, 8);
-                var height = BitConverter.ToInt32(bytes, 8);
+                var height = BitConverter.ToInt32(bytes, 0xC);
                 var bmp = new Bitmap(width, height);
                 for(x = 0; x < height; x++)
                 {
@@ -44,6 +44,7 @@ namespace D2RModding_SpriteEdit
 
                 imagePreview.Image = bmp;
                 toolbarText.Text = string.Format("{0}x{1}", width, height);
+                Text = "SpriteEdit - " + fileName;
             }
         }
 
@@ -64,19 +65,22 @@ namespace D2RModding_SpriteEdit
                 var fileName = dlg.FileName;
                 var f = File.Open(dlg.FileName, FileMode.OpenOrCreate, FileAccess.Write);
 
-                f.Write(BitConverter.GetBytes((Int32)imagePreview.Width), 0, 4);
-                f.Write(BitConverter.GetBytes((Int32)imagePreview.Height), 4, 4);
+                f.Seek(8, SeekOrigin.Current);
+                f.Write(BitConverter.GetBytes((Int32)imagePreview.Image.Width), 0, 4);
+                f.Write(BitConverter.GetBytes((Int32)imagePreview.Image.Height), 0, 4);
                 int x, y;
                 Bitmap bmp = new Bitmap(imagePreview.Image);
-                for(x = 0; x < imagePreview.Height; x++)
+                f.Seek(0x28, SeekOrigin.Begin);
+                for(x = 0; x < imagePreview.Image.Height; x++)
                 {
-                    for(y = 0; y < imagePreview.Width; y++)
+                    for(y = 0; y < imagePreview.Image.Width; y++)
                     {
-                        var pos = 0x28 + x * 4 * imagePreview.Width + y * 4;
+                        var pos = 0x28 + x * 4 * imagePreview.Image.Width + y * 4;
                         var pixel = bmp.GetPixel(y, x);
-                        f.Write(new byte[] { pixel.R, pixel.G, pixel.B, pixel.A }, pos, 4);
+                        f.Write(new byte[] { pixel.R, pixel.G, pixel.B, pixel.A }, 0, 4);
                     }
                 }
+                f.Close();
             }
         }
 
@@ -93,6 +97,7 @@ namespace D2RModding_SpriteEdit
                 var fileName = dlg.FileName;
                 imagePreview.Image = Image.FromFile(fileName);
                 toolbarText.Text = string.Format("{0}x{1}", imagePreview.Image.Width, imagePreview.Image.Height);
+                Text = "SpriteEdit - " + dlg.FileName;
             }
         }
 
