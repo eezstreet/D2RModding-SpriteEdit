@@ -171,6 +171,7 @@ namespace D2RModding_SpriteEdit
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 187);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "HSVEditForm";
             this.Text = "Edit Hue/Saturation";
             this.tableLayoutPanel1.ResumeLayout(false);

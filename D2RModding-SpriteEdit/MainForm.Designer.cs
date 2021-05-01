@@ -35,12 +35,14 @@ namespace D2RModding_SpriteEdit
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.combineFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.massTranslateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.massExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.d2RModdingDiscordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotate90ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotate_180 = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,10 +53,17 @@ namespace D2RModding_SpriteEdit
             this.flip_vertical = new System.Windows.Forms.ToolStripMenuItem();
             this.filtersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filter_hsv = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.d2RModdingDiscordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolbarText = new System.Windows.Forms.ToolStripStatusLabel();
             this.imagePreview = new System.Windows.Forms.PictureBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.numFramesTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.frameSelectionComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.zoomTrackBar = new System.Windows.Forms.TrackBar();
             this.zoomAmountLabel = new System.Windows.Forms.Label();
             this.resetPan = new System.Windows.Forms.Button();
@@ -62,6 +71,7 @@ namespace D2RModding_SpriteEdit
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,8 +79,8 @@ namespace D2RModding_SpriteEdit
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.transformToolStripMenuItem});
+            this.transformToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1029, 24);
@@ -84,8 +94,12 @@ namespace D2RModding_SpriteEdit
             this.saveToolStripMenuItem,
             this.toolStripSeparator1,
             this.importToolStripMenuItem,
+            this.importFrameToolStripMenuItem,
+            this.combineFramesToolStripMenuItem,
+            this.massTranslateToolStripMenuItem,
             this.exportToolStripMenuItem,
-            this.massExportToolStripMenuItem,
+            this.exportFrameToolStripMenuItem,
+            this.exportFramesToolStripMenuItem,
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -95,70 +109,86 @@ namespace D2RModding_SpriteEdit
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.openToolStripMenuItem.Text = "Open...";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
+            this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.saveToolStripMenuItem.Text = "Save As...";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(144, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
+            // importFrameToolStripMenuItem
+            // 
+            this.importFrameToolStripMenuItem.Name = "importFrameToolStripMenuItem";
+            this.importFrameToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.importFrameToolStripMenuItem.Text = "Import Frame...";
+            this.importFrameToolStripMenuItem.Click += new System.EventHandler(this.importFrameToolStripMenuItem_Click);
+            // 
+            // combineFramesToolStripMenuItem
+            // 
+            this.combineFramesToolStripMenuItem.Name = "combineFramesToolStripMenuItem";
+            this.combineFramesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.combineFramesToolStripMenuItem.Text = "Import Frames...";
+            this.combineFramesToolStripMenuItem.Click += new System.EventHandler(this.combineFramesToolStripMenuItem_Click);
+            // 
+            // massTranslateToolStripMenuItem
+            // 
+            this.massTranslateToolStripMenuItem.Name = "massTranslateToolStripMenuItem";
+            this.massTranslateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.massTranslateToolStripMenuItem.Text = "Mass Translate...";
+            this.massTranslateToolStripMenuItem.Click += new System.EventHandler(this.massTranslateToolStripMenuItem_Click);
+            // 
             // exportToolStripMenuItem
             // 
+            this.exportToolStripMenuItem.Enabled = false;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
-            // massExportToolStripMenuItem
+            // exportFrameToolStripMenuItem
             // 
-            this.massExportToolStripMenuItem.Enabled = false;
-            this.massExportToolStripMenuItem.Name = "massExportToolStripMenuItem";
-            this.massExportToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.massExportToolStripMenuItem.Text = "Mass Export...";
-            this.massExportToolStripMenuItem.Click += new System.EventHandler(this.massExportToolStripMenuItem_Click);
+            this.exportFrameToolStripMenuItem.Enabled = false;
+            this.exportFrameToolStripMenuItem.Name = "exportFrameToolStripMenuItem";
+            this.exportFrameToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.exportFrameToolStripMenuItem.Text = "Export Frame...";
+            this.exportFrameToolStripMenuItem.Click += new System.EventHandler(this.exportFrameToolStripMenuItem_Click);
+            // 
+            // exportFramesToolStripMenuItem
+            // 
+            this.exportFramesToolStripMenuItem.Enabled = false;
+            this.exportFramesToolStripMenuItem.Name = "exportFramesToolStripMenuItem";
+            this.exportFramesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.exportFramesToolStripMenuItem.Text = "Export Frames...";
+            this.exportFramesToolStripMenuItem.Click += new System.EventHandler(this.exportFramesToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(144, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.d2RModdingDiscordToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // d2RModdingDiscordToolStripMenuItem
-            // 
-            this.d2RModdingDiscordToolStripMenuItem.Name = "d2RModdingDiscordToolStripMenuItem";
-            this.d2RModdingDiscordToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.d2RModdingDiscordToolStripMenuItem.Text = "D2RModding Discord";
-            this.d2RModdingDiscordToolStripMenuItem.Click += new System.EventHandler(this.d2RModdingDiscordToolStripMenuItem_Click);
             // 
             // transformToolStripMenuItem
             // 
@@ -177,11 +207,12 @@ namespace D2RModding_SpriteEdit
             this.rotate_90_clockwise,
             this.rotate_90_counterclockwise});
             this.rotate90ToolStripMenuItem.Name = "rotate90ToolStripMenuItem";
-            this.rotate90ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rotate90ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.rotate90ToolStripMenuItem.Text = "Rotate...";
             // 
             // rotate_180
             // 
+            this.rotate_180.Enabled = false;
             this.rotate_180.Name = "rotate_180";
             this.rotate_180.Size = new System.Drawing.Size(195, 22);
             this.rotate_180.Text = "180°";
@@ -189,6 +220,7 @@ namespace D2RModding_SpriteEdit
             // 
             // rotate_90_clockwise
             // 
+            this.rotate_90_clockwise.Enabled = false;
             this.rotate_90_clockwise.Name = "rotate_90_clockwise";
             this.rotate_90_clockwise.Size = new System.Drawing.Size(195, 22);
             this.rotate_90_clockwise.Text = "90° Clockwise";
@@ -196,6 +228,7 @@ namespace D2RModding_SpriteEdit
             // 
             // rotate_90_counterclockwise
             // 
+            this.rotate_90_counterclockwise.Enabled = false;
             this.rotate_90_counterclockwise.Name = "rotate_90_counterclockwise";
             this.rotate_90_counterclockwise.Size = new System.Drawing.Size(195, 22);
             this.rotate_90_counterclockwise.Text = "90° Counter-Clockwise";
@@ -207,11 +240,12 @@ namespace D2RModding_SpriteEdit
             this.flip_horizontal,
             this.flip_vertical});
             this.flipToolStripMenuItem.Name = "flipToolStripMenuItem";
-            this.flipToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.flipToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.flipToolStripMenuItem.Text = "Flip...";
             // 
             // flip_horizontal
             // 
+            this.flip_horizontal.Enabled = false;
             this.flip_horizontal.Name = "flip_horizontal";
             this.flip_horizontal.Size = new System.Drawing.Size(129, 22);
             this.flip_horizontal.Text = "Horizontal";
@@ -219,6 +253,7 @@ namespace D2RModding_SpriteEdit
             // 
             // flip_vertical
             // 
+            this.flip_vertical.Enabled = false;
             this.flip_vertical.Name = "flip_vertical";
             this.flip_vertical.Size = new System.Drawing.Size(129, 22);
             this.flip_vertical.Text = "Vertical";
@@ -229,15 +264,31 @@ namespace D2RModding_SpriteEdit
             this.filtersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.filter_hsv});
             this.filtersToolStripMenuItem.Name = "filtersToolStripMenuItem";
-            this.filtersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.filtersToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.filtersToolStripMenuItem.Text = "Filters...";
             // 
             // filter_hsv
             // 
+            this.filter_hsv.Enabled = false;
             this.filter_hsv.Name = "filter_hsv";
-            this.filter_hsv.Size = new System.Drawing.Size(180, 22);
+            this.filter_hsv.Size = new System.Drawing.Size(155, 22);
             this.filter_hsv.Text = "Hue/Saturation";
             this.filter_hsv.Click += new System.EventHandler(this.filter_hsv_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.d2RModdingDiscordToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // d2RModdingDiscordToolStripMenuItem
+            // 
+            this.d2RModdingDiscordToolStripMenuItem.Name = "d2RModdingDiscordToolStripMenuItem";
+            this.d2RModdingDiscordToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.d2RModdingDiscordToolStripMenuItem.Text = "D2RModding Discord";
+            this.d2RModdingDiscordToolStripMenuItem.Click += new System.EventHandler(this.d2RModdingDiscordToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -272,11 +323,49 @@ namespace D2RModding_SpriteEdit
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.numFramesTextBox,
+            this.toolStripSeparator3,
+            this.toolStripLabel2,
+            this.frameSelectionComboBox});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1029, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(106, 22);
+            this.toolStripLabel1.Text = "Number of Frames";
+            // 
+            // numFramesTextBox
+            // 
+            this.numFramesTextBox.Enabled = false;
+            this.numFramesTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.numFramesTextBox.Name = "numFramesTextBox";
+            this.numFramesTextBox.Size = new System.Drawing.Size(100, 25);
+            this.numFramesTextBox.TextChanged += new System.EventHandler(this.onFrameCountChanged);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(83, 22);
+            this.toolStripLabel2.Text = "Current Frame";
+            // 
+            // frameSelectionComboBox
+            // 
+            this.frameSelectionComboBox.Enabled = false;
+            this.frameSelectionComboBox.Name = "frameSelectionComboBox";
+            this.frameSelectionComboBox.Size = new System.Drawing.Size(121, 25);
+            this.frameSelectionComboBox.TextChanged += new System.EventHandler(this.onFrameComboBoxChanged);
             // 
             // zoomTrackBar
             // 
@@ -344,6 +433,8 @@ namespace D2RModding_SpriteEdit
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -363,7 +454,6 @@ namespace D2RModding_SpriteEdit
         private System.Windows.Forms.ToolStripStatusLabel toolbarText;
         private System.Windows.Forms.PictureBox imagePreview;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem massExportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem d2RModdingDiscordToolStripMenuItem;
@@ -382,6 +472,16 @@ namespace D2RModding_SpriteEdit
         private System.Windows.Forms.ToolStripMenuItem flip_vertical;
         private System.Windows.Forms.ToolStripMenuItem filtersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filter_hsv;
+        private System.Windows.Forms.ToolStripMenuItem importFrameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem combineFramesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem massTranslateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportFrameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportFramesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox numFramesTextBox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox frameSelectionComboBox;
     }
 }
 
