@@ -195,7 +195,7 @@ namespace D2RModding_SpriteEdit
                 fc = 1;
             }
 
-            f.Write(new byte[] { (byte)'S', (byte)'P', (byte)'a', (byte)'1' }, 0, 4);
+            f.Write(new byte[] { (byte)'S', (byte)'p', (byte)'A', (byte)'1' }, 0, 4);
             f.Write(BitConverter.GetBytes((ushort)31), 0, 2);
             f.Write(BitConverter.GetBytes((ushort)img.Width / fc), 0, 2);
             f.Write(BitConverter.GetBytes((Int32)img.Width), 0, 4);
