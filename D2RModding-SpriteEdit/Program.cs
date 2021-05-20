@@ -137,6 +137,7 @@ namespace D2RModding_SpriteEdit
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new MainForm());
+                return;
             }
 
             if(args[0] == "sprite2png")
