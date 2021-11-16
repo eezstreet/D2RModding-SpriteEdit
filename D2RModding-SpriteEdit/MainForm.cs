@@ -287,9 +287,38 @@ namespace D2RModding_SpriteEdit
             if(dlg.ShowDialog() == DialogResult.OK)
             {
                 saveAsSprite(currentImage, currentFrameCount, dlg.FileName);
+                var splitName = dlg.FileName.Split('.');
+                var lowend = ".lowend.";
+                saveAsSprite(ResizeImage(currentImage, currentImage.Width / 2, currentImage.Height / 2), currentFrameCount, splitName[0] + lowend + splitName[1]);
                 needToSave = false;
             }
         }
+
+        public static Image ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
+
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
