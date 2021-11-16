@@ -421,7 +421,7 @@ namespace D2RModding_SpriteEdit
                                         }
                                     }
                                 }
-                                var newPath = Path.ChangeExtension(file, "bmp");
+                                var newPath = Path.ChangeExtension(file, "png");
                                 var fileName = newPath.Split('\\');
                                 Image image = bmp;
                                 image.Save(folderBrowserDialog.SelectedPath + "/" + fileName[fileName.Length - 1]);
@@ -751,6 +751,9 @@ namespace D2RModding_SpriteEdit
                     Image img = Image.FromFile(files[i]);
                     string newPath = Path.ChangeExtension(files[i], ".sprite");
                     saveAsSprite(img, 1, newPath);
+                    var splitName = newPath.Split('.');
+                    var lowend = ".lowend.";
+                    saveAsSprite(ResizeImage(img, img.Width / 2, img.Height / 2), currentFrameCount, splitName[0] + lowend + splitName[1]);
                 }
 
                 MessageBox.Show("Converted " + files.Length + " images!");
