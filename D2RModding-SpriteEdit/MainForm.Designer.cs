@@ -113,7 +113,7 @@ namespace D2RModding_SpriteEdit
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.openToolStripMenuItem.Text = "Open...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -121,7 +121,7 @@ namespace D2RModding_SpriteEdit
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.saveToolStripMenuItem.Text = "Save As...";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -133,28 +133,28 @@ namespace D2RModding_SpriteEdit
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
             this.importToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.importToolStripMenuItem.Text = "Import...";
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.ImportToolStripMenuItem_Click);
             // 
             // importFrameToolStripMenuItem
             // 
             this.importFrameToolStripMenuItem.Name = "importFrameToolStripMenuItem";
             this.importFrameToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.importFrameToolStripMenuItem.Text = "Import Frame...";
-            this.importFrameToolStripMenuItem.Click += new System.EventHandler(this.importFrameToolStripMenuItem_Click);
+            this.importFrameToolStripMenuItem.Click += new System.EventHandler(this.ImportFrameToolStripMenuItem_Click);
             // 
             // combineFramesToolStripMenuItem
             // 
             this.combineFramesToolStripMenuItem.Name = "combineFramesToolStripMenuItem";
             this.combineFramesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.combineFramesToolStripMenuItem.Text = "Import Frames...";
-            this.combineFramesToolStripMenuItem.Click += new System.EventHandler(this.combineFramesToolStripMenuItem_Click);
+            this.combineFramesToolStripMenuItem.Click += new System.EventHandler(this.CombineFramesToolStripMenuItem_Click);
             // 
             // massTranslateToolStripMenuItem
             // 
             this.massTranslateToolStripMenuItem.Name = "massTranslateToolStripMenuItem";
             this.massTranslateToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.massTranslateToolStripMenuItem.Text = "Mass Translate...";
-            this.massTranslateToolStripMenuItem.Click += new System.EventHandler(this.massTranslateToolStripMenuItem_Click);
+            this.massTranslateToolStripMenuItem.Click += new System.EventHandler(this.MassTranslateToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -162,7 +162,7 @@ namespace D2RModding_SpriteEdit
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.exportToolStripMenuItem.Text = "Export...";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.ExportToolStripMenuItem_Click);
             // 
             // massExportToolStripMenuItem
             // 
@@ -170,7 +170,7 @@ namespace D2RModding_SpriteEdit
             this.massExportToolStripMenuItem.Name = "massExportToolStripMenuItem";
             this.massExportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.massExportToolStripMenuItem.Text = "Mass Export...";
-            this.massExportToolStripMenuItem.Click += new System.EventHandler(this.massExportToolStripMenuItem_Click);
+            this.massExportToolStripMenuItem.Click += new System.EventHandler(this.MassExportToolStripMenuItem_Click);
             // 
             // exportFrameToolStripMenuItem
             // 
@@ -178,7 +178,7 @@ namespace D2RModding_SpriteEdit
             this.exportFrameToolStripMenuItem.Name = "exportFrameToolStripMenuItem";
             this.exportFrameToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.exportFrameToolStripMenuItem.Text = "Export Frame...";
-            this.exportFrameToolStripMenuItem.Click += new System.EventHandler(this.exportFrameToolStripMenuItem_Click);
+            this.exportFrameToolStripMenuItem.Click += new System.EventHandler(this.ExportFrameToolStripMenuItem_Click);
             // 
             // exportFramesToolStripMenuItem
             // 
@@ -186,7 +186,7 @@ namespace D2RModding_SpriteEdit
             this.exportFramesToolStripMenuItem.Name = "exportFramesToolStripMenuItem";
             this.exportFramesToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.exportFramesToolStripMenuItem.Text = "Export Frames...";
-            this.exportFramesToolStripMenuItem.Click += new System.EventHandler(this.exportFramesToolStripMenuItem_Click);
+            this.exportFramesToolStripMenuItem.Click += new System.EventHandler(this.ExportFramesToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -198,7 +198,7 @@ namespace D2RModding_SpriteEdit
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // transformToolStripMenuItem
             // 
@@ -226,7 +226,7 @@ namespace D2RModding_SpriteEdit
             this.rotate_180.Name = "rotate_180";
             this.rotate_180.Size = new System.Drawing.Size(195, 22);
             this.rotate_180.Text = "180°";
-            this.rotate_180.Click += new System.EventHandler(this.rotate_180_Click);
+            this.rotate_180.Click += new System.EventHandler(this.Rotate_180_Click);
             // 
             // rotate_90_clockwise
             // 
@@ -234,7 +234,7 @@ namespace D2RModding_SpriteEdit
             this.rotate_90_clockwise.Name = "rotate_90_clockwise";
             this.rotate_90_clockwise.Size = new System.Drawing.Size(195, 22);
             this.rotate_90_clockwise.Text = "90° Clockwise";
-            this.rotate_90_clockwise.Click += new System.EventHandler(this.rotate_90_clockwise_Click);
+            this.rotate_90_clockwise.Click += new System.EventHandler(this.Rotate_90_clockwise_Click);
             // 
             // rotate_90_counterclockwise
             // 
@@ -242,7 +242,7 @@ namespace D2RModding_SpriteEdit
             this.rotate_90_counterclockwise.Name = "rotate_90_counterclockwise";
             this.rotate_90_counterclockwise.Size = new System.Drawing.Size(195, 22);
             this.rotate_90_counterclockwise.Text = "90° Counter-Clockwise";
-            this.rotate_90_counterclockwise.Click += new System.EventHandler(this.rotate_90_counterclockwise_Click);
+            this.rotate_90_counterclockwise.Click += new System.EventHandler(this.Rotate_90_counterclockwise_Click);
             // 
             // flipToolStripMenuItem
             // 
@@ -259,7 +259,7 @@ namespace D2RModding_SpriteEdit
             this.flip_horizontal.Name = "flip_horizontal";
             this.flip_horizontal.Size = new System.Drawing.Size(129, 22);
             this.flip_horizontal.Text = "Horizontal";
-            this.flip_horizontal.Click += new System.EventHandler(this.flip_horizontal_Click);
+            this.flip_horizontal.Click += new System.EventHandler(this.Flip_horizontal_Click);
             // 
             // flip_vertical
             // 
@@ -267,7 +267,7 @@ namespace D2RModding_SpriteEdit
             this.flip_vertical.Name = "flip_vertical";
             this.flip_vertical.Size = new System.Drawing.Size(129, 22);
             this.flip_vertical.Text = "Vertical";
-            this.flip_vertical.Click += new System.EventHandler(this.flip_vertical_Click);
+            this.flip_vertical.Click += new System.EventHandler(this.Flip_vertical_Click);
             // 
             // filtersToolStripMenuItem
             // 
@@ -298,7 +298,7 @@ namespace D2RModding_SpriteEdit
             this.d2RModdingDiscordToolStripMenuItem.Name = "d2RModdingDiscordToolStripMenuItem";
             this.d2RModdingDiscordToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.d2RModdingDiscordToolStripMenuItem.Text = "D2RModding Discord";
-            this.d2RModdingDiscordToolStripMenuItem.Click += new System.EventHandler(this.d2RModdingDiscordToolStripMenuItem_Click);
+            this.d2RModdingDiscordToolStripMenuItem.Click += new System.EventHandler(this.D2RModdingDiscordToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -326,10 +326,10 @@ namespace D2RModding_SpriteEdit
             this.imagePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imagePreview.TabIndex = 2;
             this.imagePreview.TabStop = false;
-            this.imagePreview.MouseDown += new System.Windows.Forms.MouseEventHandler(this.onMouseDown);
-            this.imagePreview.MouseLeave += new System.EventHandler(this.onMouseLeave);
-            this.imagePreview.MouseMove += new System.Windows.Forms.MouseEventHandler(this.onMouseMove);
-            this.imagePreview.MouseUp += new System.Windows.Forms.MouseEventHandler(this.onMouseUp);
+            this.imagePreview.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnMouseDown);
+            this.imagePreview.MouseLeave += new System.EventHandler(this.OnMouseLeave);
+            this.imagePreview.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnMouseMove);
+            this.imagePreview.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // toolStrip1
             // 
@@ -357,7 +357,7 @@ namespace D2RModding_SpriteEdit
             this.numFramesTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numFramesTextBox.Name = "numFramesTextBox";
             this.numFramesTextBox.Size = new System.Drawing.Size(100, 25);
-            this.numFramesTextBox.TextChanged += new System.EventHandler(this.onFrameCountChanged);
+            this.numFramesTextBox.TextChanged += new System.EventHandler(this.OnFrameCountChanged);
             // 
             // toolStripSeparator3
             // 
@@ -375,7 +375,7 @@ namespace D2RModding_SpriteEdit
             this.frameSelectionComboBox.Enabled = false;
             this.frameSelectionComboBox.Name = "frameSelectionComboBox";
             this.frameSelectionComboBox.Size = new System.Drawing.Size(121, 25);
-            this.frameSelectionComboBox.TextChanged += new System.EventHandler(this.onFrameComboBoxChanged);
+            this.frameSelectionComboBox.TextChanged += new System.EventHandler(this.OnFrameComboBoxChanged);
             // 
             // zoomTrackBar
             // 
@@ -390,7 +390,7 @@ namespace D2RModding_SpriteEdit
             this.zoomTrackBar.TabIndex = 4;
             this.zoomTrackBar.TickFrequency = 50;
             this.zoomTrackBar.Value = 100;
-            this.zoomTrackBar.Scroll += new System.EventHandler(this.zoomTrackBar_Scroll);
+            this.zoomTrackBar.Scroll += new System.EventHandler(this.ZoomTrackBar_Scroll);
             // 
             // zoomAmountLabel
             // 
