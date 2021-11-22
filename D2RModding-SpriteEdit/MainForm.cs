@@ -729,14 +729,18 @@ namespace D2RModding_SpriteEdit
             {
                 // grab each file, convert to .sprite
                 string[] files = dlg.FileNames;
-                for(var i = 0; i < files.Length; i++)
+                for (var i = 0; i < files.Length; i++)
                 {
                     Image img = Image.FromFile(files[i]);
                     string newPath = Path.ChangeExtension(files[i], ".sprite");
                     SaveAsSprite(img, 1, newPath);
-                    var splitName = newPath.Split('.');
-                    var lowend = ".lowend.";
-                    SaveAsSprite(ResizeImage(img, img.Width / 2, img.Height / 2), CurrentFrameCount, splitName[0] + lowend + splitName[1]);
+                    string lowend = ".lowend";
+                    var filepath = newPath;
+                    var filepathsplit = String.Format("{0}{1}{2}",
+                    Path.GetFileNameWithoutExtension(filepath), lowend, Path.GetExtension(filepath));
+                    var filepathlow = Path.Combine(Path.GetDirectoryName(filepath), filepathsplit);
+                    SaveAsSprite(img, 1, newPath);
+                    SaveAsSprite(ResizeImage(img, img.Width / 2, img.Height / 2), CurrentFrameCount, filepathlow);
                 }
 
                 MessageBox.Show("Converted " + files.Length + " images!");
