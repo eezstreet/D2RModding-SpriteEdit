@@ -172,6 +172,14 @@ namespace D2RModding_SpriteEdit
             this.massExportToolStripMenuItem.Text = "Mass Export...";
             this.massExportToolStripMenuItem.Click += new System.EventHandler(this.MassExportToolStripMenuItem_Click);
             // 
+            // massExportToolStripMenuItem
+            // 
+            this.massExportToolStripMenuItem.Enabled = true;
+            this.massExportToolStripMenuItem.Name = "massExportToolStripMenuItem";
+            this.massExportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.massExportToolStripMenuItem.Text = "Mass Export...";
+            this.massExportToolStripMenuItem.Click += new System.EventHandler(this.massExportToolStripMenuItem_Click);
+            // 
             // exportFrameToolStripMenuItem
             // 
             this.exportFrameToolStripMenuItem.Enabled = false;
