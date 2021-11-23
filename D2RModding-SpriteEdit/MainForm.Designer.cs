@@ -41,6 +41,7 @@ namespace D2RModding_SpriteEdit
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.massExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,6 +99,7 @@ namespace D2RModding_SpriteEdit
             this.combineFramesToolStripMenuItem,
             this.massTranslateToolStripMenuItem,
             this.exportToolStripMenuItem,
+            this.massExportToolStripMenuItem,
             this.exportFrameToolStripMenuItem,
             this.exportFramesToolStripMenuItem,
             this.toolStripSeparator2,
@@ -161,6 +163,14 @@ namespace D2RModding_SpriteEdit
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // massExportToolStripMenuItem
+            // 
+            this.massExportToolStripMenuItem.Enabled = true;
+            this.massExportToolStripMenuItem.Name = "massExportToolStripMenuItem";
+            this.massExportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.massExportToolStripMenuItem.Text = "Mass Export...";
+            this.massExportToolStripMenuItem.Click += new System.EventHandler(this.massExportToolStripMenuItem_Click);
             // 
             // exportFrameToolStripMenuItem
             // 
@@ -477,6 +487,7 @@ namespace D2RModding_SpriteEdit
         private System.Windows.Forms.ToolStripMenuItem massTranslateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportFrameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportFramesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem massExportToolStripMenuItem;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox numFramesTextBox;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;

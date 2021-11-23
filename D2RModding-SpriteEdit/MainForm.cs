@@ -364,13 +364,77 @@ namespace D2RModding_SpriteEdit
                 needToSave = false;
             }
         }
+
+        private void massExportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Diablo II Resurrected Sprites (*.sprite)|*.sprite|All Files (*.*)|*.*";
+            dlg.DefaultExt = ".sprite";
+            dlg.Multiselect = true;
+
+            if (MessageBox.Show("First select the sprites you would like to convert", "Notification", MessageBoxButtons.OK) == DialogResult.OK)
+            {
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    var images = new List<Image>();
+
+                    if (MessageBox.Show("Now select the directory you would like to export to.", "Notification", MessageBoxButtons.OK) == DialogResult.OK)
+                    {
+                        var folderBrowserDialog = new FolderBrowserDialog();
+                        folderBrowserDialog.Description = "Select the directory you would like to export to.";
+
+                        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            foreach (var file in dlg.FileNames)
+                            {
+                                // open up the image
+                                var bytes = File.ReadAllBytes(file);
+                                int x, y;
+                                var version = BitConverter.ToUInt16(bytes, 4);
+                                var width = BitConverter.ToInt32(bytes, 8);
+                                var height = BitConverter.ToInt32(bytes, 0xC);
+                                var bmp = new Bitmap(width, height);
+                                currentFrameCount = BitConverter.ToUInt32(bytes, 0x14);
+
+
+                                if (version == 31)
+                                {   // regular RGBA
+                                    for (x = 0; x < height; x++)
+                                    {
+                                        for (y = 0; y < width; y++)
+                                        {
+                                            var baseVal = 0x28 + x * 4 * width + y * 4;
+                                            bmp.SetPixel(y, x, Color.FromArgb(bytes[baseVal + 3], bytes[baseVal + 0], bytes[baseVal + 1], bytes[baseVal + 2]));
+                                        }
+                                    }
+                                }
+                                else if (version == 61)
+                                {   // DXT
+                                    var tempBytes = new byte[width * height * 4];
+                                    Dxt.DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
+                                    for (y = 0; y < height; y++)
+                                    {
+                                        for (x = 0; x < width; x++)
+                                        {
+                                            var baseVal = (y * width) + (x * 4);
+                                            bmp.SetPixel(x, y, Color.FromArgb(tempBytes[baseVal + 3], tempBytes[baseVal], tempBytes[baseVal + 1], tempBytes[baseVal + 2]));
+                                        }
+                                    }
+                                }
+                                var newPath = Path.ChangeExtension(file, "bmp");
+                                var fileName = newPath.Split('\\');
+                                Image image = bmp;
+                                image.Save(folderBrowserDialog.SelectedPath + "/" + fileName[fileName.Length - 1]);
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-        }
-        private void massExportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
         private void d2RModdingDiscordToolStripMenuItem_Click(object sender, EventArgs e)
         {
