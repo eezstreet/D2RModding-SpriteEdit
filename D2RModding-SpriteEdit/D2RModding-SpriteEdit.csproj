@@ -53,6 +53,7 @@
     <Compile Include="HSVEditForm.Designer.cs">
       <DependentUpon>HSVEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="images\Sprite.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

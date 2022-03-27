@@ -387,6 +387,7 @@ namespace D2RModding_SpriteEdit
                         {
                             foreach (var file in dlg.FileNames)
                             {
+                                // TODO: Switch to use Program.ConvertSpriteToImage(string[] args, string format)
                                 // open up the image
                                 var bytes = File.ReadAllBytes(file);
                                 int x, y;

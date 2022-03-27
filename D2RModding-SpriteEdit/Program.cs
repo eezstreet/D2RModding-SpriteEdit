@@ -87,6 +87,7 @@ namespace D2RModding_SpriteEdit
 
             for(var i = 1; i < args.Length; i++)
             {
+                //TODO: Check if arg is file or dir. If dir, expand/append.
                 string img = args[i];
                 Image image = Image.FromFile(img);
                 if(image == null)
