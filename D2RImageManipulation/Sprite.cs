@@ -26,7 +26,8 @@ namespace D2RImageManipulation
 
         public Sprite()
         {
-            this.bytes = new byte[HEADER_SIZE];
+            bytes = new byte[HEADER_SIZE];
+            Array.Copy(new byte[] { (byte)'S', (byte)'p', (byte)'A', (byte)'1' }, bytes, 4);
         }
 
         public Sprite(String path)
@@ -101,6 +102,23 @@ namespace D2RImageManipulation
             set
             {
                 Array.Copy(BitConverter.GetBytes(value), 0, bytes, HEIGHT_INDEX, HEIGHT_LENGTH);
+            }
+        }
+
+        public byte[] Pixels
+        {
+            get
+            {
+                var pixels = new byte[bytes.Length - HEADER_SIZE];
+                Array.Copy(bytes, HEADER_SIZE, pixels, 0, pixels.Length);
+                return pixels;
+            }
+            set
+            {
+                var oldBytes = bytes;
+                bytes = new byte[value.Length + HEADER_SIZE];
+                Array.Copy(oldBytes, bytes, HEADER_SIZE);
+                Array.Copy(value, 0, bytes, HEADER_SIZE, value.Length);
             }
         }
 

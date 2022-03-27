@@ -188,33 +188,22 @@ namespace D2RModding_SpriteEdit
         {
             InitializeComponent();
         }
-        private void saveAsSprite(Image img, uint fc, string fileName)
+
+        private void saveAsSprite(Image img, uint frameCount, string fileName)
         {
-            var f = File.Open(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-            if(fc < 0)
+            if (frameCount < 0)
             {
                 throw new ArgumentOutOfRangeException("fc", "Frame Count must be greater than 0");
             }
 
-            f.Write(new byte[] { (byte)'S', (byte)'p', (byte)'A', (byte)'1' }, 0, 4);
-            f.Write(BitConverter.GetBytes((ushort)31), 0, 2);
-            f.Write(BitConverter.GetBytes((ushort)img.Width / fc), 0, 2);
-            f.Write(BitConverter.GetBytes((Int32)img.Width), 0, 4);
-            f.Write(BitConverter.GetBytes((Int32)img.Height), 0, 4);
-            f.Seek(0x14, SeekOrigin.Begin);
-            f.Write(BitConverter.GetBytes((UInt32)fc), 0, 4);
-            int x, y;
-            Bitmap bmp = new Bitmap(img);
-            f.Seek(0x28, SeekOrigin.Begin);
-            for (x = 0; x < img.Height; x++)
+            using (var f = File.Open(fileName, FileMode.OpenOrCreate, FileAccess.Write))
             {
-                for (y = 0; y < img.Width; y++)
-                {
-                    var pixel = bmp.GetPixel(y, x);
-                    f.Write(new byte[] { pixel.R, pixel.G, pixel.B, pixel.A }, 0, 4);
-                }
+                var sprite = Converters.ImageToSprite.Invoke(img);
+                sprite.FrameCount = frameCount;
+                sprite.FrameWidth = (ushort)(sprite.Width / frameCount);
+                byte[] bytes = sprite.getBytes();
+                f.Write(bytes, 0, bytes.Length);
             }
-            f.Close();
         }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {

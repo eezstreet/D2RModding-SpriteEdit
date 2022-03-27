@@ -9,29 +9,34 @@ namespace D2RImageManipulation
     {
         public static readonly Converter<Image, Sprite> ImageToSprite
             = new Converter<Image, Sprite>((image) => {
-                const int headerSize = 40;
-                using (var stream = new MemoryStream(headerSize + (image.Height * image.Width * 4)))
+                var sprite = new Sprite();
+                sprite.Version = 31;
+                sprite.FrameWidth = (ushort)image.Width;
+                sprite.Width = image.Width;
+                sprite.Height = image.Height;
+                sprite.FrameCount = 1;
+
+                int x, y;
+                Bitmap bmp = new Bitmap(image);
+                var pixels = new byte[image.Height * image.Width * 4];
+                var pixelIndex = 0;
+                for (x = 0; x < image.Height; x++)
                 {
-                    stream.Write(new byte[] { (byte)'S', (byte)'p', (byte)'A', (byte)'1' }, 0, 4);
-                    stream.Write(BitConverter.GetBytes((ushort)31), 0, 2);
-                    stream.Write(BitConverter.GetBytes((ushort)image.Width), 0, 2);
-                    stream.Write(BitConverter.GetBytes((Int32)image.Width), 0, 4);
-                    stream.Write(BitConverter.GetBytes((Int32)image.Height), 0, 4);
-                    stream.Seek(0x14, SeekOrigin.Begin);
-                    stream.Write(BitConverter.GetBytes((UInt32)1), 0, 4);
-                    int x, y;
-                    Bitmap bmp = new Bitmap(image);
-                    stream.Seek(0x28, SeekOrigin.Begin);
-                    for (x = 0; x < image.Height; x++)
+                    for (y = 0; y < image.Width; y++)
                     {
-                        for (y = 0; y < image.Width; y++)
-                        {
-                            var pixel = bmp.GetPixel(y, x);
-                            stream.Write(new byte[] { pixel.R, pixel.G, pixel.B, pixel.A }, 0, 4);
-                        }
+                        var pixel = bmp.GetPixel(y, x);
+                        Array.Copy(
+                            new byte[] { pixel.R, pixel.G, pixel.B, pixel.A },
+                            0, 
+                            pixels, 
+                            pixelIndex, 
+                            4
+                        );
+                        pixelIndex += 4;
                     }
-                    return new Sprite(stream.ToArray());
                 }
+                sprite.Pixels = pixels;
+                return sprite;
             });
 
         public static readonly Converter<Sprite, Bitmap> SpriteToBitmap
