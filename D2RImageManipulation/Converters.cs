@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace D2RImageManipulation
 {
-    static class Converters
+    public static class Converters
     {
         public static readonly Converter<Image, Sprite> ImageToSprite
             = new Converter<Image, Sprite>((image) => {
@@ -58,7 +58,7 @@ namespace D2RImageManipulation
                 else if (version == 61)
                 {   // DXT
                     var tempBytes = new byte[width * height * 4];
-                    Dxt.DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
+                    DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
                     for (y = 0; y < height; y++)
                     {
                         for (x = 0; x < width; x++)

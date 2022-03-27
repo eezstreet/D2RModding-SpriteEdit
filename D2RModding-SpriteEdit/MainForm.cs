@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using D2RImageManipulation;
 
 namespace D2RModding_SpriteEdit
 {
@@ -190,9 +191,9 @@ namespace D2RModding_SpriteEdit
         private void saveAsSprite(Image img, uint fc, string fileName)
         {
             var f = File.Open(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-            if(fc == 0)
+            if(fc < 0)
             {
-                fc = 1;
+                throw new ArgumentOutOfRangeException("fc", "Frame Count must be greater than 0");
             }
 
             f.Write(new byte[] { (byte)'S', (byte)'p', (byte)'A', (byte)'1' }, 0, 4);
@@ -256,7 +257,7 @@ namespace D2RModding_SpriteEdit
                 else if(version == 61)
                 {   // DXT
                     var tempBytes = new byte[width * height * 4];
-                    Dxt.DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
+                    DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
                     for(y = 0; y < height; y++)
                     {
                         for(x = 0; x < width; x++)
@@ -389,42 +390,10 @@ namespace D2RModding_SpriteEdit
                             {
                                 // TODO: Switch to use Program.ConvertSpriteToImage(string[] args, string format)
                                 // open up the image
-                                var bytes = File.ReadAllBytes(file);
-                                int x, y;
-                                var version = BitConverter.ToUInt16(bytes, 4);
-                                var width = BitConverter.ToInt32(bytes, 8);
-                                var height = BitConverter.ToInt32(bytes, 0xC);
-                                var bmp = new Bitmap(width, height);
-                                currentFrameCount = BitConverter.ToUInt32(bytes, 0x14);
-
-
-                                if (version == 31)
-                                {   // regular RGBA
-                                    for (x = 0; x < height; x++)
-                                    {
-                                        for (y = 0; y < width; y++)
-                                        {
-                                            var baseVal = 0x28 + x * 4 * width + y * 4;
-                                            bmp.SetPixel(y, x, Color.FromArgb(bytes[baseVal + 3], bytes[baseVal + 0], bytes[baseVal + 1], bytes[baseVal + 2]));
-                                        }
-                                    }
-                                }
-                                else if (version == 61)
-                                {   // DXT
-                                    var tempBytes = new byte[width * height * 4];
-                                    Dxt.DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
-                                    for (y = 0; y < height; y++)
-                                    {
-                                        for (x = 0; x < width; x++)
-                                        {
-                                            var baseVal = (y * width) + (x * 4);
-                                            bmp.SetPixel(x, y, Color.FromArgb(tempBytes[baseVal + 3], tempBytes[baseVal], tempBytes[baseVal + 1], tempBytes[baseVal + 2]));
-                                        }
-                                    }
-                                }
+                                var sprite = new Sprite(file);
                                 var newPath = Path.ChangeExtension(file, "bmp");
                                 var fileName = newPath.Split('\\');
-                                Image image = bmp;
+                                Image image = Converters.SpriteToBitmap.Invoke(sprite);
                                 image.Save(folderBrowserDialog.SelectedPath + "/" + fileName[fileName.Length - 1]);
                             }
                         }

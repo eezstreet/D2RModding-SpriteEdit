@@ -39,7 +39,7 @@ namespace D2RModding_SpriteEdit
                 {
                     if (File.Exists(fileName))
                     {
-
+                        fileAction.Invoke(fileName);
                     }
                     else
                     {
@@ -80,7 +80,7 @@ namespace D2RModding_SpriteEdit
                 var sprite = new Sprite(fileName);
 
                 // now save
-                Image image = sprite.asBitmap;
+                Image image = Converters.SpriteToBitmap.Invoke(sprite);
                 image.Save(newPath);
                 Console.WriteLine(String.Format("Successfully converted {0}", newPath));
             });
@@ -98,8 +98,8 @@ namespace D2RModding_SpriteEdit
                     {
                         if (f != null)
                         {
-                            var sprite = new Sprite(image);
-                            var bytes = sprite.asBytes;
+                            var sprite = Converters.ImageToSprite.Invoke(image);
+                            var bytes = sprite.getBytes();
                             f.Write(bytes, 0, bytes.Length);
                             Console.WriteLine(String.Format("Successfully converted {0}", newPath));
                         }
