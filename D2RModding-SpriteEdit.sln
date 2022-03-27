@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2RModding-SpriteEdit", "D2RModding-SpriteEdit\D2RModding-SpriteEdit.csproj", "{E2AF8A2A-59C2-4554-9BAD-9F220DDA16EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "D2RImageManipulation", "D2RImageManipulation\D2RImageManipulation.csproj", "{7E786F8A-C76B-4D5A-81C6-AC5A9831BCB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E2AF8A2A-59C2-4554-9BAD-9F220DDA16EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2AF8A2A-59C2-4554-9BAD-9F220DDA16EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2AF8A2A-59C2-4554-9BAD-9F220DDA16EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E786F8A-C76B-4D5A-81C6-AC5A9831BCB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E786F8A-C76B-4D5A-81C6-AC5A9831BCB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E786F8A-C76B-4D5A-81C6-AC5A9831BCB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E786F8A-C76B-4D5A-81C6-AC5A9831BCB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

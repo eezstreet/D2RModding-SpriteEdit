@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Dxt
+namespace D2RImageManipulation
 {
     public static class DxtDecoder
     {

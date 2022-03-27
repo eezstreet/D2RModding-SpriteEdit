@@ -46,14 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DxtDecoder.cs" />
     <Compile Include="HSVEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HSVEditForm.Designer.cs">
       <DependentUpon>HSVEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="images\Sprite.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\D2RImageManipulation\D2RImageManipulation.csproj">
+      <Project>{7e786f8a-c76b-4d5a-81c6-ac5a9831bcb1}</Project>
+      <Name>D2RImageManipulation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

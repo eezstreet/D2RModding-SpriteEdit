@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using D2RModding_SpriteEdit.images;
+using D2RImageManipulation;
 
 namespace D2RModding_SpriteEdit
 {
