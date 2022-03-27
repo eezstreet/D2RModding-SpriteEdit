@@ -10,122 +10,110 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using D2RModding_SpriteEdit.images;
 
 namespace D2RModding_SpriteEdit
 {
     static class Program
     {
-        static void ConvertSpriteToImage(string[] args, string format)
+        static readonly ParallelOptions parallelOptions = new ParallelOptions
         {
-            var totalFilesConverted = 0;
+            MaxDegreeOfParallelism = 10
+        };
+
+        static void ForAllFiles(string[] args, Action<string> fileAction)
+        {
+            var filesSkipped = new System.Collections.Concurrent.BlockingCollection<String>();
+            var filesFailed = new System.Collections.Concurrent.ConcurrentDictionary<String, String>();
             if (args.Length <= 1)
             {
-                Console.WriteLine("Please specify sprite(s)");
+                Console.WriteLine("Please specify file(s)");
                 return;
             }
 
-            for(var i = 1; i < args.Length; i++)
+            var filesArr = new string[args.Length - 1];
+            Array.Copy(args, 1, filesArr, 0, args.Length - 1);
+            Parallel.ForEach(filesArr, parallelOptions, fileName =>
             {
-                var fileName = args[i];
-                var newPath = Path.ChangeExtension(fileName, format);
-                var bytes = File.ReadAllBytes(fileName);
-
-                if(bytes == null)
+                try
                 {
-                    Console.WriteLine("Unable to read " + fileName);
-                    continue;
-                }
-                int x, y;
-                var version = BitConverter.ToUInt16(bytes, 4);
-                var width = BitConverter.ToInt32(bytes, 8);
-                var height = BitConverter.ToInt32(bytes, 0xC);
-                var bmp = new Bitmap(width, height);
-
-
-                if (version == 31)
-                {   // regular RGBA
-                    for (x = 0; x < height; x++)
+                    if (File.Exists(fileName))
                     {
-                        for (y = 0; y < width; y++)
-                        {
-                            var baseVal = 0x28 + x * 4 * width + y * 4;
-                            bmp.SetPixel(y, x, Color.FromArgb(bytes[baseVal + 3], bytes[baseVal + 0], bytes[baseVal + 1], bytes[baseVal + 2]));
-                        }
+
+                    }
+                    else
+                    {
+                        filesSkipped.Add(fileName);
                     }
                 }
-                else if (version == 61)
-                {   // DXT
-                    var tempBytes = new byte[width * height * 4];
-                    Dxt.DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
-                    for (y = 0; y < height; y++)
-                    {
-                        for (x = 0; x < width; x++)
-                        {
-                            var baseVal = (y * width) + (x * 4);
-                            bmp.SetPixel(x, y, Color.FromArgb(tempBytes[baseVal + 3], tempBytes[baseVal], tempBytes[baseVal + 1], tempBytes[baseVal + 2]));
-                        }
-                    }
+                catch (Exception e)
+                {
+                    filesFailed.TryAdd(fileName, e.Message);
                 }
+            });
+
+            if (filesSkipped.Count > 0)
+            {
+                Console.WriteLine(String.Format("Skipped {0} Files:", filesSkipped.Count));
+                foreach (var file in filesSkipped)
+                {
+                    Console.WriteLine(String.Format(" * {0}", file));
+                }
+
+            }
+
+            if (filesFailed.Count > 0)
+            {
+                Console.WriteLine(String.Format("Failed to convert {0} Files:", filesFailed.Count));
+                foreach (var file in filesFailed)
+                {
+                    Console.WriteLine(String.Format(" * {0}: with error \n      {1}", file.Key, file.Value));
+                }
+            }
+        }
+
+        static void ConvertSpriteToImage(string[] args, string format)
+        {
+            ForAllFiles(args, (fileName) =>
+            {
+                var newPath = Path.ChangeExtension(fileName, format);
+                var sprite = new Sprite(fileName);
 
                 // now save
-                Image image = bmp;
+                Image image = sprite.asBitmap;
                 image.Save(newPath);
-
-                totalFilesConverted++;
-            }
-
-            Console.WriteLine("Converted " + totalFilesConverted + " images");
+                Console.WriteLine(String.Format("Successfully converted {0}", newPath));
+            });
         }
+
         static void ConvertImageToSprite(string[] args)
         {
-            int numConverted = 0;
-            if(args.Length <= 1)
+            ForAllFiles(args, (fileName) =>
             {
-                Console.WriteLine("Please specify image(s)");
-                return;
-            }
-
-            for(var i = 1; i < args.Length; i++)
-            {
-                //TODO: Check if arg is file or dir. If dir, expand/append.
-                string img = args[i];
-                Image image = Image.FromFile(img);
-                if(image == null)
+                Image image = Image.FromFile(fileName);
+                if (image != null)
                 {
-                    Console.WriteLine("Unable to open " + img);
-                    continue;
-                }
-                string newPath = Path.ChangeExtension(img, ".sprite");
-                var f = File.Open(newPath, FileMode.OpenOrCreate, FileAccess.Write);
-                if(f == null)
-                {
-                    Console.WriteLine("Unable to write to " + newPath);
-                    continue;
-                }
-                f.Write(new byte[] { (byte)'S', (byte)'p', (byte)'A', (byte)'1' }, 0, 4);
-                f.Write(BitConverter.GetBytes((ushort)31), 0, 2);
-                f.Write(BitConverter.GetBytes((ushort)image.Width), 0, 2);
-                f.Write(BitConverter.GetBytes((Int32)image.Width), 0, 4);
-                f.Write(BitConverter.GetBytes((Int32)image.Height), 0, 4);
-                f.Seek(0x14, SeekOrigin.Begin);
-                f.Write(BitConverter.GetBytes((UInt32)1), 0, 4);
-                int x, y;
-                Bitmap bmp = new Bitmap(image);
-                f.Seek(0x28, SeekOrigin.Begin);
-                for (x = 0; x < image.Height; x++)
-                {
-                    for (y = 0; y < image.Width; y++)
+                    var newPath = Path.ChangeExtension(fileName, ".sprite");
+                    using (var f = File.Open(newPath, FileMode.OpenOrCreate, FileAccess.Write))
                     {
-                        var pixel = bmp.GetPixel(y, x);
-                        f.Write(new byte[] { pixel.R, pixel.G, pixel.B, pixel.A }, 0, 4);
+                        if (f != null)
+                        {
+                            var sprite = new Sprite(image);
+                            var bytes = sprite.asBytes;
+                            f.Write(bytes, 0, bytes.Length);
+                            Console.WriteLine(String.Format("Successfully converted {0}", newPath));
+                        }
+                        else
+                        {
+                            throw new IOException(String.Format("Could not write to {0}", newPath));
+                        }
                     }
                 }
-                f.Close();
-
-                numConverted++;
-            }
-
-            Console.WriteLine("Converted " + numConverted + " images");
+                else
+                {
+                    throw new IOException(String.Format("Could not read {0} as image", fileName));
+                }
+            });
         }
         /// <summary>
         /// The main entry point for the application.
