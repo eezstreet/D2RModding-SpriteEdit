@@ -66,15 +66,15 @@ namespace D2RModding_SpriteEdit
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.frameSelectionComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.zoomTrackBar = new System.Windows.Forms.TrackBar();
             this.zoomAmountLabel = new System.Windows.Forms.Label();
             this.resetPan = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.DirectoryListViewToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.addDirectoryBtn = new System.Windows.Forms.ToolStripButton();
             this.DirectoriesTreeView = new System.Windows.Forms.TreeView();
+            this.DirectoryListViewToolStrip = new System.Windows.Forms.ToolStrip();
+            this.addDirectoryBtn = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
@@ -387,6 +387,15 @@ namespace D2RModding_SpriteEdit
             this.frameSelectionComboBox.Size = new System.Drawing.Size(121, 25);
             this.frameSelectionComboBox.TextChanged += new System.EventHandler(this.onFrameComboBoxChanged);
             // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "toolStripButton2";
+            // 
             // zoomTrackBar
             // 
             this.zoomTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -454,6 +463,15 @@ namespace D2RModding_SpriteEdit
             this.splitContainer1.SplitterDistance = 343;
             this.splitContainer1.TabIndex = 8;
             // 
+            // DirectoriesTreeView
+            // 
+            this.DirectoriesTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DirectoriesTreeView.Location = new System.Drawing.Point(0, 25);
+            this.DirectoriesTreeView.Name = "DirectoriesTreeView";
+            this.DirectoriesTreeView.Size = new System.Drawing.Size(339, 600);
+            this.DirectoriesTreeView.TabIndex = 2;
+            this.DirectoriesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DirectoriesTreeView_AfterSelect);
+            // 
             // DirectoryListViewToolStrip
             // 
             this.DirectoryListViewToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -463,15 +481,6 @@ namespace D2RModding_SpriteEdit
             this.DirectoryListViewToolStrip.Size = new System.Drawing.Size(339, 25);
             this.DirectoryListViewToolStrip.TabIndex = 1;
             this.DirectoryListViewToolStrip.Text = "toolStrip1";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton2";
             // 
             // addDirectoryBtn
             // 
@@ -483,14 +492,6 @@ namespace D2RModding_SpriteEdit
             this.addDirectoryBtn.Text = "Add Directory...";
             this.addDirectoryBtn.ToolTipText = "Add a directory";
             this.addDirectoryBtn.Click += new System.EventHandler(this.addDirectoryButton_Click);
-            // 
-            // DirectoriesTreeView
-            // 
-            this.DirectoriesTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DirectoriesTreeView.Location = new System.Drawing.Point(0, 25);
-            this.DirectoriesTreeView.Name = "DirectoriesTreeView";
-            this.DirectoriesTreeView.Size = new System.Drawing.Size(339, 600);
-            this.DirectoriesTreeView.TabIndex = 2;
             // 
             // MainForm
             // 

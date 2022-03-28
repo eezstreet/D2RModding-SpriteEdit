@@ -234,45 +234,21 @@ namespace D2RModding_SpriteEdit
             {
                 // open up the image
                 var fileName = dlg.FileName;
-                var bytes = File.ReadAllBytes(fileName);
-                int x, y;
-                var version = BitConverter.ToUInt16(bytes, 4);
-                var width = BitConverter.ToInt32(bytes, 8);
-                var height = BitConverter.ToInt32(bytes, 0xC);
-                var bmp = new Bitmap(width, height);
-                currentFrameCount = BitConverter.ToUInt32(bytes, 0x14);
-                
-
-                if(version == 31)
-                {   // regular RGBA
-                    for (x = 0; x < height; x++)
-                    {
-                        for (y = 0; y < width; y++)
-                        {
-                            var baseVal = 0x28 + x * 4 * width + y * 4;
-                            bmp.SetPixel(y, x, Color.FromArgb(bytes[baseVal + 3], bytes[baseVal + 0], bytes[baseVal + 1], bytes[baseVal + 2]));
-                        }
-                    }
-                }
-                else if(version == 61)
-                {   // DXT
-                    var tempBytes = new byte[width * height * 4];
-                    DxtDecoder.DecompressDXT5(bytes, width, height, tempBytes);
-                    for(y = 0; y < height; y++)
-                    {
-                        for(x = 0; x < width; x++)
-                        {
-                            var baseVal = (y * width) + (x * 4);
-                            bmp.SetPixel(x, y, Color.FromArgb(tempBytes[baseVal + 3], tempBytes[baseVal], tempBytes[baseVal + 1], tempBytes[baseVal + 2]));
-                        }
-                    }
-                }
-
-                currentImage = bmp;
-                toolbarText.Text = string.Format("{0}x{1}", width, height);
-                Text = "SpriteEdit - " + fileName;
+                openImage(fileName);
             }
         }
+
+        private void openImage(String fileName)
+        {
+            var bytes = File.ReadAllBytes(fileName);
+            var sprite = new Sprite(bytes);
+
+            currentImage = Converters.SpriteToBitmap.Invoke(sprite);
+            currentFrameCount = sprite.FrameCount;
+            toolbarText.Text = string.Format("{0}x{1}", currentImage.Width, currentImage.Height);
+            Text = "SpriteEdit - " + fileName;
+        }
+
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -805,6 +781,24 @@ namespace D2RModding_SpriteEdit
                     DirectoriesTreeView.Nodes.Add(node);
                 }
                 
+            }
+        }
+
+        private void DirectoriesTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            var node = e.Node;
+            if (node is FileTreeNode)
+            {
+                if (needToSave)
+                {
+                    if (MessageBox.Show(String.Format("Would you like to open {0}? Doing so will erase your changes to the current image.", node.Text), "Notification", MessageBoxButtons.YesNo) == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+
+                openImage((node as FileTreeNode).FileInfo.FullName);
+
             }
         }
     }
