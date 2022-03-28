@@ -16,6 +16,13 @@ namespace D2RModding_SpriteEdit
 {
     public partial class MainForm : Form
     {
+        private const String IMAGE_FILTER = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
+                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
+                + "All Files (*.*)|*.*";
+        private const String IMAGE_DEFAULT_EXTENSIONS = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+        private const String SPRITE_FILTER = "Diablo II Resurrected Sprites (*.sprite)|*.sprite|All Files (*.*)|*.*";
+        private const String SPRITE_DEFAULT_EXTENSIONS = ".sprite";
+
         private bool needToSave = false;
         private uint _currentFrameCount;
         private uint currentFrameCount
@@ -208,8 +215,8 @@ namespace D2RModding_SpriteEdit
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Diablo II Resurrected Sprites (*.sprite)|*.sprite|All Files (*.*)|*.*";
-            dlg.DefaultExt = ".sprite";
+            dlg.Filter = SPRITE_FILTER
+            dlg.DefaultExt = SPRITE_DEFAULT_EXTENSIONS;
 
             if (needToSave)
             {
@@ -265,8 +272,8 @@ namespace D2RModding_SpriteEdit
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "Diablo II Resurrected Sprites (*.sprite)|*.sprite|All Files (*.*)|*.*";
-            dlg.DefaultExt = ".sprite";
+            dlg.Filter = SPRITE_FILTER;
+            dlg.DefaultExt = SPRITE_DEFAULT_EXTENSIONS;
 
             if(currentImage == null)
             {
@@ -312,10 +319,8 @@ namespace D2RModding_SpriteEdit
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
-                + "All Files (*.*)|*.*";
-            dlg.DefaultExt = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+            dlg.Filter = IMAGE_FILTER;
+            dlg.DefaultExt = IMAGE_DEFAULT_EXTENSIONS;
 
             if(needToSave)
             {
@@ -336,10 +341,8 @@ namespace D2RModding_SpriteEdit
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
-                + "All Files (*.*)|*.*";
-            dlg.DefaultExt = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+            dlg.Filter = IMAGE_FILTER;
+            dlg.DefaultExt = IMAGE_DEFAULT_EXTENSIONS;
 
             if(currentImage == null)
             {
@@ -358,8 +361,8 @@ namespace D2RModding_SpriteEdit
         private void massExportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Diablo II Resurrected Sprites (*.sprite)|*.sprite|All Files (*.*)|*.*";
-            dlg.DefaultExt = ".sprite";
+            dlg.Filter = SPRITE_FILTER;
+            dlg.DefaultExt = SPRITE_DEFAULT_EXTENSIONS;
             dlg.Multiselect = true;
 
             if (MessageBox.Show("First select the sprites you would like to convert", "Notification", MessageBoxButtons.OK) == DialogResult.OK)
@@ -615,10 +618,8 @@ namespace D2RModding_SpriteEdit
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = true;
-            dlg.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
-                + "All Files (*.*)|*.*";
-            dlg.DefaultExt = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+            dlg.Filter = IMAGE_FILTER;
+            dlg.DefaultExt = IMAGE_DEFAULT_EXTENSIONS;
 
             if(dlg.ShowDialog() == DialogResult.OK)
             {
@@ -655,10 +656,8 @@ namespace D2RModding_SpriteEdit
 
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = true;
-            dlg.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
-                + "All Files (*.*)|*.*";
-            dlg.DefaultExt = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+            dlg.Filter = IMAGE_FILTER;
+            dlg.DefaultExt = IMAGE_DEFAULT_EXTENSIONS;
 
             if (dlg.ShowDialog() == DialogResult.OK)
             {
@@ -696,10 +695,8 @@ namespace D2RModding_SpriteEdit
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Multiselect = true;
-            dlg.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
-                + "All Files (*.*)|*.*";
-            dlg.DefaultExt = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+            dlg.Filter = IMAGE_FILTER;
+            dlg.DefaultExt = IMAGE_DEFAULT_EXTENSIONS;
 
             if(dlg.ShowDialog() == DialogResult.OK)
             {
@@ -727,10 +724,8 @@ namespace D2RModding_SpriteEdit
             }
 
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
-                + "All Files (*.*)|*.*";
-            dlg.DefaultExt = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+            dlg.Filter = IMAGE_FILTER;
+            dlg.DefaultExt = IMAGE_DEFAULT_EXTENSIONS;
 
             if (currentImage == null)
             {
@@ -759,10 +754,8 @@ namespace D2RModding_SpriteEdit
             }
 
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
-                + "All Files (*.*)|*.*";
-            dlg.DefaultExt = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+            dlg.Filter = IMAGE_FILTER;
+            dlg.DefaultExt = IMAGE_DEFAULT_EXTENSIONS;
 
             if (currentImage == null)
             {
