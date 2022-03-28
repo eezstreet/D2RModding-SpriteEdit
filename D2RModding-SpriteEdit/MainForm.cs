@@ -11,6 +11,7 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using D2RImageManipulation;
+using D2RModding_SpriteEdit.Forms;
 
 namespace D2RModding_SpriteEdit
 {
@@ -22,6 +23,8 @@ namespace D2RModding_SpriteEdit
         private const String IMAGE_DEFAULT_EXTENSIONS = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
         private const String SPRITE_FILTER = "Diablo II Resurrected Sprites (*.sprite)|*.sprite|All Files (*.*)|*.*";
         private const String SPRITE_DEFAULT_EXTENSIONS = ".sprite";
+
+        private SpriteDirectoryTreeNodeFactory treeNodeFactory = new SpriteDirectoryTreeNodeFactory();
 
         private bool needToSave = false;
         private uint _currentFrameCount;
@@ -212,10 +215,11 @@ namespace D2RModding_SpriteEdit
                 f.Write(bytes, 0, bytes.Length);
             }
         }
+
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = SPRITE_FILTER
+            dlg.Filter = SPRITE_FILTER;
             dlg.DefaultExt = SPRITE_DEFAULT_EXTENSIONS;
 
             if (needToSave)
@@ -380,7 +384,6 @@ namespace D2RModding_SpriteEdit
                         {
                             foreach (var file in dlg.FileNames)
                             {
-                                // TODO: Switch to use Program.ConvertSpriteToImage(string[] args, string format)
                                 // open up the image
                                 var sprite = new Sprite(file);
                                 var newPath = Path.ChangeExtension(file, "bmp");
@@ -786,6 +789,23 @@ namespace D2RModding_SpriteEdit
         private void onFrameCountChanged(object sneder, EventArgs e)
         {
             currentFrameCount = UInt32.Parse(numFramesTextBox.Text);
+        }
+
+        private void addDirectoryButton_Click(object sender, EventArgs e)
+        {
+            var folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.Description = "Select the directory you would like to import sprites from";
+
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                var dirInfo = new DirectoryInfo(folderBrowserDialog.SelectedPath);
+                var node = treeNodeFactory.getNode(dirInfo);
+                if(node.TreeView == null) //todo: if not already in the tree
+                {
+                    DirectoriesTreeView.Nodes.Add(node);
+                }
+                
+            }
         }
     }
 }
