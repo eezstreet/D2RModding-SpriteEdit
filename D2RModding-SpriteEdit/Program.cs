@@ -80,8 +80,7 @@ namespace D2RModding_SpriteEdit
                 var sprite = new Sprite(fileName);
 
                 // now save
-                Image image = Converters.SpriteToBitmap.Invoke(sprite);
-                image.Save(newPath);
+                FileIO.saveAs(sprite, newPath);
                 Console.WriteLine(String.Format("Successfully converted {0}", newPath));
             });
         }
@@ -94,20 +93,8 @@ namespace D2RModding_SpriteEdit
                 if (image != null)
                 {
                     var newPath = Path.ChangeExtension(fileName, ".sprite");
-                    using (var f = File.Open(newPath, FileMode.OpenOrCreate, FileAccess.Write))
-                    {
-                        if (f != null)
-                        {
-                            var sprite = Converters.ImageToSprite.Invoke(image);
-                            var bytes = sprite.getBytes();
-                            f.Write(bytes, 0, bytes.Length);
-                            Console.WriteLine(String.Format("Successfully converted {0}", newPath));
-                        }
-                        else
-                        {
-                            throw new IOException(String.Format("Could not write to {0}", newPath));
-                        }
-                    }
+                    FileIO.saveAs(image, FileIO.Format.Sprite, newPath);
+                    Console.WriteLine(String.Format("Successfully converted {0}", newPath));
                 }
                 else
                 {
@@ -148,6 +135,10 @@ namespace D2RModding_SpriteEdit
             else if(args[0] == "sprite2jpg")
             {
                 ConvertSpriteToImage(args, "jpg");
+            }
+            else if (args[0] == "sprite2tga")
+            {
+                ConvertSpriteToImage(args, "tga");
             }
             /*else if(args[0] == "frames2png")
             {

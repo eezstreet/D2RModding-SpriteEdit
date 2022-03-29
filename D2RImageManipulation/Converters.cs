@@ -43,7 +43,7 @@ namespace D2RImageManipulation
             = new Converter<Sprite, Bitmap>((sprite) =>
             {
                 int x, y;
-                var bytes = sprite.getBytes();
+                var bytes = sprite.GetBytes();
                 var version = BitConverter.ToUInt16(bytes, 4);
                 var width = BitConverter.ToInt32(bytes, 8);
                 var height = BitConverter.ToInt32(bytes, 0xC);

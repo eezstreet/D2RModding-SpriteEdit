@@ -17,10 +17,10 @@ namespace D2RModding_SpriteEdit
 {
     public partial class MainForm : Form
     {
-        private const String IMAGE_FILTER = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
-                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff|"
+        private const String IMAGE_FILTER = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|TGA|*.tga|"
+                + "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.tga|"
                 + "All Files (*.*)|*.*";
-        private const String IMAGE_DEFAULT_EXTENSIONS = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
+        private const String IMAGE_DEFAULT_EXTENSIONS = "*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff;*.tga";
         private const String SPRITE_FILTER = "Diablo II Resurrected Sprites (*.sprite)|*.sprite|All Files (*.*)|*.*";
         private const String SPRITE_DEFAULT_EXTENSIONS = ".sprite";
 
@@ -211,7 +211,7 @@ namespace D2RModding_SpriteEdit
                 var sprite = Converters.ImageToSprite.Invoke(img);
                 sprite.FrameCount = frameCount;
                 sprite.FrameWidth = (ushort)(sprite.Width / frameCount);
-                byte[] bytes = sprite.getBytes();
+                byte[] bytes = sprite.GetBytes();
                 f.Write(bytes, 0, bytes.Length);
             }
         }
@@ -332,8 +332,7 @@ namespace D2RModding_SpriteEdit
 
             if(dlg.ShowDialog() == DialogResult.OK)
             {
-                var fileName = dlg.FileName;
-                currentImage.Save(fileName);
+                FileIO.saveAs(currentImage, dlg.FileName);
                 needToSave = false;
             }
         }
@@ -362,10 +361,9 @@ namespace D2RModding_SpriteEdit
                             {
                                 // open up the image
                                 var sprite = new Sprite(file);
-                                var newPath = Path.ChangeExtension(file, "bmp");
+                                var newPath = Path.ChangeExtension(file, FileIO.extensions[FileIO.Format.BMP][0]);
                                 var fileName = newPath.Split('\\');
-                                Image image = Converters.SpriteToBitmap.Invoke(sprite);
-                                image.Save(folderBrowserDialog.SelectedPath + "/" + fileName[fileName.Length - 1]);
+                                FileIO.saveAs(sprite, folderBrowserDialog.SelectedPath + "/" + fileName[fileName.Length - 1]);
                             }
                         }
                     }
@@ -718,7 +716,7 @@ namespace D2RModding_SpriteEdit
                 int widthPerFrame = (int)(currentImage.Width / currentFrameCount);
                 Bitmap subbmp = new Bitmap(currentImage).Clone(new Rectangle((int)currentlyViewedFrame * widthPerFrame, 0, widthPerFrame, currentImage.Height),
                     currentImage.PixelFormat);
-                subbmp.Save(fileName);
+                FileIO.saveAs(subbmp, fileName);
             }
         }
         /**
@@ -752,7 +750,7 @@ namespace D2RModding_SpriteEdit
                     var thisFrameFileName = AddSuffix(fileName, "_" + i);
                     Bitmap subbmp = new Bitmap(currentImage).Clone(new Rectangle((int)i * widthPerFrame, 0, widthPerFrame, currentImage.Height),
                         currentImage.PixelFormat);
-                    subbmp.Save(thisFrameFileName);
+                    FileIO.saveAs(subbmp, thisFrameFileName);
                 }
             }
         }

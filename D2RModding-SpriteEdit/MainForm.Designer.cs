@@ -66,7 +66,6 @@ namespace D2RModding_SpriteEdit
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.frameSelectionComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.zoomTrackBar = new System.Windows.Forms.TrackBar();
             this.zoomAmountLabel = new System.Windows.Forms.Label();
             this.resetPan = new System.Windows.Forms.Button();
@@ -348,8 +347,7 @@ namespace D2RModding_SpriteEdit
             this.numFramesTextBox,
             this.toolStripSeparator3,
             this.toolStripLabel2,
-            this.frameSelectionComboBox,
-            this.toolStripButton2});
+            this.frameSelectionComboBox});
             this.FramesToolstrip.Location = new System.Drawing.Point(0, 0);
             this.FramesToolstrip.Name = "FramesToolstrip";
             this.FramesToolstrip.Size = new System.Drawing.Size(678, 25);
@@ -386,15 +384,6 @@ namespace D2RModding_SpriteEdit
             this.frameSelectionComboBox.Name = "frameSelectionComboBox";
             this.frameSelectionComboBox.Size = new System.Drawing.Size(121, 25);
             this.frameSelectionComboBox.TextChanged += new System.EventHandler(this.onFrameComboBoxChanged);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton2";
             // 
             // zoomTrackBar
             // 
@@ -571,7 +560,6 @@ namespace D2RModding_SpriteEdit
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox frameSelectionComboBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStrip DirectoryListViewToolStrip;
         private System.Windows.Forms.ToolStripButton addDirectoryBtn;
         private System.Windows.Forms.TreeView DirectoriesTreeView;

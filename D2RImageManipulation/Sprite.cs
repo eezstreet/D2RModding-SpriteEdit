@@ -122,7 +122,7 @@ namespace D2RImageManipulation
             }
         }
 
-        public byte[] getBytes()
+        public byte[] GetBytes()
         {
             byte[] copy = new byte[this.bytes.Length];
             Array.Copy(this.bytes, copy, this.bytes.Length);
