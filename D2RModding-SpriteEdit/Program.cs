@@ -89,7 +89,7 @@ namespace D2RModding_SpriteEdit
         {
             ForAllFiles(args, (fileName) =>
             {
-                Image image = Image.FromFile(fileName);
+                Image image = FileIO.loadAsImage(fileName);
                 if (image != null)
                 {
                     var newPath = Path.ChangeExtension(fileName, ".sprite");

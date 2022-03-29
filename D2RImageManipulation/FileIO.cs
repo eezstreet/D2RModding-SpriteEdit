@@ -46,6 +46,26 @@ namespace D2RImageManipulation
             { ".tga", Format.TGA }
         };
 
+        public static Image loadAsImage(string fileName)
+        {
+            var ext = Path.GetExtension(fileName);
+            var format = formats[ext];
+            Image img;
+            switch (format)
+            {
+                case Format.Sprite:
+                    img = Converters.SpriteToBitmap.Invoke(new Sprite(fileName));
+                    break;
+                case Format.TGA:
+                    img = TGA.FromFile(fileName).ToBitmap();
+                    break;
+                default:
+                    img = Image.FromFile(fileName);
+                    break;
+            }
+            return img;
+        }
+
         public static void saveAs(Image image, string fileName)
         {
             var ext = Path.GetExtension(fileName);

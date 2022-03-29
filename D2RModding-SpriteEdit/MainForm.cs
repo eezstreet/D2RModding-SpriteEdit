@@ -313,7 +313,7 @@ namespace D2RModding_SpriteEdit
             if(dlg.ShowDialog() == DialogResult.OK)
             {
                 var fileName = dlg.FileName;
-                currentImage = Image.FromFile(fileName);
+                currentImage = FileIO.loadAsImage(fileName);
                 toolbarText.Text = string.Format("{0}x{1}", currentImage.Width, currentImage.Height);
                 Text = "SpriteEdit - " + dlg.FileName;
             }
@@ -601,7 +601,7 @@ namespace D2RModding_SpriteEdit
             if(dlg.ShowDialog() == DialogResult.OK)
             {
                 // try and load the image. it should match the frame size.
-                Image newImg = Image.FromFile(dlg.FileName);
+                Image newImg = FileIO.loadAsImage(dlg.FileName);
                 if(newImg.Width != currentImage.Width / currentFrameCount ||
                     newImg.Height != currentImage.Height)
                 {
@@ -642,7 +642,7 @@ namespace D2RModding_SpriteEdit
                 Image[] files = new Image[fileNames.Length];
                 for (var i = 0; i < fileNames.Length; i++)
                 {
-                    files[i] = Image.FromFile(fileNames[i]);
+                    files[i] = FileIO.loadAsImage(fileNames[i]);
                     if (files[i].Width != files[0].Width ||
                         files[i].Height != files[0].Height)
                     {
@@ -681,7 +681,7 @@ namespace D2RModding_SpriteEdit
                 string[] files = dlg.FileNames;
                 for(var i = 0; i < files.Length; i++)
                 {
-                    Image img = Image.FromFile(files[i]);
+                    Image img = FileIO.loadAsImage(files[i]);
                     string newPath = Path.ChangeExtension(files[i], ".sprite");
                     saveAsSprite(img, 1, newPath);
                 }
