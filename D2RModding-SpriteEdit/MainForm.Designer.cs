@@ -29,9 +29,10 @@ namespace D2RModding_SpriteEdit
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,9 +40,9 @@ namespace D2RModding_SpriteEdit
             this.combineFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.massTranslateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.massExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportFramesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.massExportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,7 @@ namespace D2RModding_SpriteEdit
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolbarText = new System.Windows.Forms.ToolStripStatusLabel();
             this.imagePreview = new System.Windows.Forms.PictureBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.FramesToolstrip = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.numFramesTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -69,11 +70,20 @@ namespace D2RModding_SpriteEdit
             this.zoomAmountLabel = new System.Windows.Forms.Label();
             this.resetPan = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.DirectoriesTreeView = new System.Windows.Forms.TreeView();
+            this.DirectoryListViewToolStrip = new System.Windows.Forms.ToolStrip();
+            this.addDirectoryBtn = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).BeginInit();
-            this.toolStrip1.SuspendLayout();
+            this.FramesToolstrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.DirectoryListViewToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -91,7 +101,7 @@ namespace D2RModding_SpriteEdit
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
+            this.openFileToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.toolStripSeparator1,
             this.importToolStripMenuItem,
@@ -108,12 +118,12 @@ namespace D2RModding_SpriteEdit
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // openToolStripMenuItem
+            // openFileToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.openToolStripMenuItem.Text = "Open...";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.openFileToolStripMenuItem.Text = "Open...";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -166,7 +176,6 @@ namespace D2RModding_SpriteEdit
             // 
             // massExportToolStripMenuItem
             // 
-            this.massExportToolStripMenuItem.Enabled = true;
             this.massExportToolStripMenuItem.Name = "massExportToolStripMenuItem";
             this.massExportToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.massExportToolStripMenuItem.Text = "Mass Export...";
@@ -304,9 +313,9 @@ namespace D2RModding_SpriteEdit
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolbarText});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 631);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 603);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1029, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(678, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -320,9 +329,9 @@ namespace D2RModding_SpriteEdit
             // 
             this.imagePreview.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.imagePreview.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagePreview.Location = new System.Drawing.Point(0, 24);
+            this.imagePreview.Location = new System.Drawing.Point(0, 0);
             this.imagePreview.Name = "imagePreview";
-            this.imagePreview.Size = new System.Drawing.Size(1029, 607);
+            this.imagePreview.Size = new System.Drawing.Size(678, 603);
             this.imagePreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imagePreview.TabIndex = 2;
             this.imagePreview.TabStop = false;
@@ -331,19 +340,19 @@ namespace D2RModding_SpriteEdit
             this.imagePreview.MouseMove += new System.Windows.Forms.MouseEventHandler(this.onMouseMove);
             this.imagePreview.MouseUp += new System.Windows.Forms.MouseEventHandler(this.onMouseUp);
             // 
-            // toolStrip1
+            // FramesToolstrip
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FramesToolstrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.numFramesTextBox,
             this.toolStripSeparator3,
             this.toolStripLabel2,
             this.frameSelectionComboBox});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1029, 25);
-            this.toolStrip1.TabIndex = 3;
-            this.toolStrip1.Text = "toolStrip1";
+            this.FramesToolstrip.Location = new System.Drawing.Point(0, 0);
+            this.FramesToolstrip.Name = "FramesToolstrip";
+            this.FramesToolstrip.Size = new System.Drawing.Size(678, 25);
+            this.FramesToolstrip.TabIndex = 3;
+            this.FramesToolstrip.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
@@ -354,7 +363,6 @@ namespace D2RModding_SpriteEdit
             // numFramesTextBox
             // 
             this.numFramesTextBox.Enabled = false;
-            this.numFramesTextBox.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numFramesTextBox.Name = "numFramesTextBox";
             this.numFramesTextBox.Size = new System.Drawing.Size(100, 25);
             this.numFramesTextBox.TextChanged += new System.EventHandler(this.onFrameCountChanged);
@@ -422,18 +430,68 @@ namespace D2RModding_SpriteEdit
             this.label1.TabIndex = 7;
             this.label1.Text = "PREVIEW";
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.DirectoriesTreeView);
+            this.splitContainer1.Panel1.Controls.Add(this.DirectoryListViewToolStrip);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.FramesToolstrip);
+            this.splitContainer1.Panel2.Controls.Add(this.imagePreview);
+            this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
+            this.splitContainer1.Size = new System.Drawing.Size(1029, 629);
+            this.splitContainer1.SplitterDistance = 343;
+            this.splitContainer1.TabIndex = 8;
+            // 
+            // DirectoriesTreeView
+            // 
+            this.DirectoriesTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DirectoriesTreeView.Location = new System.Drawing.Point(0, 25);
+            this.DirectoriesTreeView.Name = "DirectoriesTreeView";
+            this.DirectoriesTreeView.Size = new System.Drawing.Size(339, 600);
+            this.DirectoriesTreeView.TabIndex = 2;
+            this.DirectoriesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.DirectoriesTreeView_AfterSelect);
+            // 
+            // DirectoryListViewToolStrip
+            // 
+            this.DirectoryListViewToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addDirectoryBtn});
+            this.DirectoryListViewToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.DirectoryListViewToolStrip.Name = "DirectoryListViewToolStrip";
+            this.DirectoryListViewToolStrip.Size = new System.Drawing.Size(339, 25);
+            this.DirectoryListViewToolStrip.TabIndex = 1;
+            this.DirectoryListViewToolStrip.Text = "toolStrip1";
+            // 
+            // addDirectoryBtn
+            // 
+            this.addDirectoryBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.addDirectoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("addDirectoryBtn.Image")));
+            this.addDirectoryBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.addDirectoryBtn.Name = "addDirectoryBtn";
+            this.addDirectoryBtn.Size = new System.Drawing.Size(93, 22);
+            this.addDirectoryBtn.Text = "Add Directory...";
+            this.addDirectoryBtn.ToolTipText = "Add a directory";
+            this.addDirectoryBtn.Click += new System.EventHandler(this.addDirectoryButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1029, 653);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.resetPan);
             this.Controls.Add(this.zoomAmountLabel);
             this.Controls.Add(this.zoomTrackBar);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.imagePreview);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -443,9 +501,17 @@ namespace D2RModding_SpriteEdit
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagePreview)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.FramesToolstrip.ResumeLayout(false);
+            this.FramesToolstrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zoomTrackBar)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.DirectoryListViewToolStrip.ResumeLayout(false);
+            this.DirectoryListViewToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -455,7 +521,7 @@ namespace D2RModding_SpriteEdit
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
@@ -467,7 +533,7 @@ namespace D2RModding_SpriteEdit
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem d2RModdingDiscordToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip FramesToolstrip;
         private System.Windows.Forms.TrackBar zoomTrackBar;
         private System.Windows.Forms.Label zoomAmountLabel;
         private System.Windows.Forms.Button resetPan;
@@ -493,6 +559,10 @@ namespace D2RModding_SpriteEdit
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox frameSelectionComboBox;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ToolStrip DirectoryListViewToolStrip;
+        private System.Windows.Forms.ToolStripButton addDirectoryBtn;
+        private System.Windows.Forms.TreeView DirectoriesTreeView;
     }
 }
 

@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DxtDecoder.cs" />
+    <Compile Include="Forms\SpriteDirectoryTreeNode.cs" />
+    <Compile Include="Forms\FileTreeNode.cs" />
+    <Compile Include="Forms\SpriteDirectoryTreeNodeFactory.cs" />
     <Compile Include="HSVEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +100,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\D2RImageManipulation\D2RImageManipulation.csproj">
+      <Project>{7e786f8a-c76b-4d5a-81c6-ac5a9831bcb1}</Project>
+      <Name>D2RImageManipulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TGASharpLib\TGASharpLib.csproj">
+      <Project>{e36e9fa3-c4eb-4b74-b9b4-a2a98ec6e4d9}</Project>
+      <Name>TGASharpLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
